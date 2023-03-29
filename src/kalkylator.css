@@ -1,0 +1,200 @@
+
+.rh-calculator{    
+    padding: 2rem 4rem;
+}
+.rh-calculator-container {  
+  display: flex;
+}
+.rh-calculator-column--left{
+  flex: 1;
+  width: 35%;
+  background-color: #F5F6F7;
+  border: 1px solid #C4C8CA; 
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05), 0px 20px 25px -5px rgba(0, 0, 0, 0.05), 0px 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border-radius: 4px;
+}
+.rh-calculator-column--right{
+  width: 65%;
+  margin-left: 5em;
+  background: #FFFFFF;
+  border: 1px solid #C4C8CA;   
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05), 0px 20px 25px -5px rgba(0, 0, 0, 0.05), 0px 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border-radius: 4px;
+}
+.rh-calculator-form{  
+  margin-left: 1em;
+  margin-right: 1em;
+}
+.rh-calculator-form--last{
+  padding-bottom: 2em;
+  margin-left: 1em;
+  margin-right: 1em; 
+}
+input[type="number"] { 
+  display: block;
+  padding: 1px 5px;
+}
+.rh-calculator-line{
+  padding-bottom: 2em;
+  margin-left: 1em;
+  margin-right: 1em;
+  border-bottom: 1px solid black; 
+}
+.rh-calculator-form .rh-calculator-form-input{
+  width: 98%;
+  height: 2em;
+}
+.rh-calculator-weight, 
+.rh-calculator-length
+{
+  padding-bottom: 1em;
+}
+.rh-form-activity-element-control{
+  display: block;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+.rh-form-control--label{
+  display: flex;
+}
+input[type="radio"] { 
+  display: block;
+}
+.rh-form-control--label span{
+  padding-left: 10px;
+  display: block;
+}
+
+/*Personliga input-värden*/
+.rh-result-list-personal-result{
+  display: block;
+  width: 100%;
+  margin-left: 2em;
+}
+.rh-result-list-personal--info{
+  display: flex;
+  width: 100%;
+  padding: 0.2em 0em;
+  font-size: large;
+}
+.rh-result-list-personal-result--header{
+  text-align: left;
+  min-width: 3em;  
+}
+.rh-result-list-personal-result--space{
+  min-width: 1em;
+  max-width: 2em;
+}
+.rh-result-list--icon img{  
+  margin-left: 2em; 
+  width: 4em;
+  height: 4em;
+}
+
+/*Energivärden*/
+.rh-result-list{
+  border-bottom: 1px solid black;
+  display: flex;
+  align-items: center;  
+  padding-top: 2.5em;
+  padding-bottom: 2.5em;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+.rh-result-list-info{
+  display: block;
+  width: 100%;
+  margin-left: 2em;
+  font-size: large; 
+}
+.rh-result-list--text{
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+}
+.rh-result-list--break{
+  display: none;
+}
+
+/*Proteinvärden*/
+.rh-result-list--protein{   
+  border-bottom: none;
+}
+
+/*BMI > 25 värden*/ 
+.rh-result-list__item-energy-info--overweight{
+  font-size: medium; 
+  margin-block-start: 0.7em;
+  margin-block-end: 0.7em;
+}
+.rh-info-overweight--text{
+  display: block;
+  margin-block: 0px;
+}
+.rh-info-overweight--text-invisible{
+  display: block;
+  margin-block: 0px;
+  opacity: 0;
+  pointer-events: none;
+  visibility: none;
+}
+
+/*Button*/
+button{
+  margin-top: 1rem;
+  width: 8em;
+  height: 2.5rem;
+  font-size: medium;
+  background-color: #F4C870;
+  border: 1px solid #C4C8CA; 
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05), 0px 20px 25px -5px rgba(0, 0, 0, 0.05), 0px 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border-radius: 4px;  
+}
+@media only screen and (max-width: 700px) {
+  .rh-calculator {
+    padding: 2rem;    
+  }
+  h1{
+    font-size: x-large;
+  }
+  h2{
+    font-size: large;
+  }
+  .rh-calculator-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0rem;
+  }
+  .rh-calculator-column--left{
+    flex: 100%;  
+  }
+  .rh-calculator-column--right{
+    flex: 100%;
+    margin-left: 0px; 
+  }
+  .rh-result-list{
+    display: table;
+    margin: 0;
+    width: 100%;
+    padding: 1em 0em;
+  }
+  .rh-result-list--icon img{
+    margin: auto;  
+    display: table-row;  
+    padding-bottom: 0.5em; 
+  }
+  .rh-result-list--break{
+    display: flex;
+  } 
+  .rh-result-list-info,
+  .rh-result-list-personal--info{
+    margin: auto;
+    display: table-row;
+    text-align: center;
+  }
+  .rh-result-list-personal-result{
+    display: table;
+    margin: auto;
+    text-align: center;
+  }
+}
