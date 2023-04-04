@@ -1,7 +1,8 @@
 import React from 'react';
 // import './envision.css';
-import './kalkylator.css';
+import './calculator.css';
 import { useState } from "react";
+import CalculatorForm from './components/CalculatorForm';
 
 type CalculatorValues = {
     weight: string;
@@ -9,24 +10,78 @@ type CalculatorValues = {
     age: string;
 }
 const ActivityValues = [
-    {
-        id: "Basalmetabolism",
-        value: 20
-    },
-    {
-        id: "Sängbunden",
-        value: 25
-    },
-    {
-        id: "Uppegående med begränsad fysisk aktivitet",
-        value: 30
-    },
-    {
-        id: "Återuppbyggnadskost",
-        value: 35
-    }
+    { id: "Basalmetabolism", value: 20 }, 
+    { id: "Sängbunden", value: 25 }, 
+    { id: "Uppegående med begränsad fysisk aktivitet", value: 30 }, 
+    { id: "Återuppbyggnadskost", value: 35 }
 ]
-
+function ProtHealthy({
+    protHealthy
+}: any) 
+{           
+    return (    
+        <div>
+            <p className="rh-result-list--text">Proteinbehov som frisk: 
+            <br className='rh-result-list--break'></br> 
+            <strong> {protHealthy} gram/dygn </strong></p>
+        </div>      
+    )
+} 
+function ProtUnHealthy({
+    lowerLimit,
+    upperLimit
+}: any)
+{
+    return (
+    <div>
+    <p className="rh-result-list--text">Proteinbehov som sjuk: 
+    <br className='rh-result-list--break'></br>
+    <strong> {lowerLimit} - {upperLimit} gram/dygn</strong></p>
+</div>
+    )
+}
+function ActivityInfo({
+    title,
+    text,
+    energyValue
+}: any){
+    return(
+    <div>
+        <p className="rh-result-list--text">{title}
+        <br className='rh-result-list--break'></br>    
+        <strong>{energyValue}{text}</strong></p>                                   
+    </div>
+    )
+} 
+function OverWeightInfo({
+    length,
+    BMI,
+}: any) {
+    const infoText = "Justering för övervikt (BMI > 25)";
+    return (    
+    <div className='rh-result-list__item-energy-info--overweight'> 
+        {(length) > 100 && BMI > 25 
+            ? <p className='rh-info-overweight--text'>{infoText}</p> 
+            : <p className='rh-info-overweight--text-invisible'>{infoText}</p>   
+        } 
+        </div> 
+    )
+}
+function PersonalInput({ 
+    inputValue,
+    inputTitle,
+    inputUnit
+    }
+    : any) 
+    {
+        return(
+        <div className='rh-result-list-personal--info'>                                    
+            <span className='rh-result-list-personal-result--header'>{inputTitle}: </span>  
+            <span className='rh-result-list-personal-result--space'></span>                         
+                <span><strong>{inputValue && (inputValue + inputUnit)}</strong></span> 
+        </div> 
+    )
+}
 export default function Energikalkylator(){  
 
     const [values, setValues] = React.useState<CalculatorValues>({
@@ -40,7 +95,7 @@ export default function Energikalkylator(){
     const handleChange = (fieldName: keyof CalculatorValues) => (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
         ) => {
-            setValues({...values, [fieldName]: e.target.value});
+            setValues({...values, [fieldName]: e.target.value});            
         };
     
     const handleSelect = (
@@ -53,7 +108,6 @@ export default function Energikalkylator(){
     const refreshPage = () => {
         window.location.reload();
     }
-    let overweightInfo = "Justering för övervikt (BMI > 25)";
     
     let weightInNumber = parseInt(values.weight);
     let lengthInNumber = parseInt(values.length)
@@ -120,40 +174,27 @@ export default function Energikalkylator(){
                     <div className='rh-calculator-form'>
                         <div>                         
                             <form>
-                                <h2>Beräkna energi</h2>            
-                                <label>Vikt (kg)</label>
-                                <div className="rh-calculator-weight">
-                                    <input
-                                    type="number"
-                                    className="rh-calculator-form-input"
-                                    placeholder={'Ange vikt'}
-                                    value={values.weight}
-                                    onChange={handleChange("weight")}
-                                    id='weight'
-                                    />
-                                </div>                                    
-                                <label>Längd (cm)</label>
-                                <div className="rh-calculator-length">
-                                    <input
-                                    type="number"
-                                    className="rh-calculator-form-input"
-                                    placeholder={'Ange längd'}
-                                    value={values.length}
-                                    onChange={handleChange("length")}
-                                    id='length'
-                                    />
-                                </div>                                    
-                                <label>Ålder (år)</label>
-                                <div className="rh-calculator-age">
-                                    <input
-                                    type="number"
-                                    className="rh-calculator-form-input"
-                                    placeholder={'Ange ålder'}
-                                    value={values.age}
-                                    onChange={handleChange("age")}
-                                    id='age'
-                                    />
-                                </div> 
+                                <h2>Beräkna energi</h2>
+                                <CalculatorForm 
+                                labelTitle="Vikt (kg)" 
+                                placeholderTitle='Ange vikt' 
+                                value={values.weight} 
+                                onChange={handleChange("weight")} 
+                                id="weight" /> 
+
+                                <CalculatorForm 
+                                labelTitle="Längd (cm)" 
+                                placeholderTitle='Ange längd' 
+                                value={values.length} 
+                                onChange={handleChange("length")} 
+                                id="length" />
+
+                                <CalculatorForm 
+                                labelTitle="Ålder (år)" 
+                                placeholderTitle='Ange ålder' 
+                                value={values.age} 
+                                onChange={handleChange("age")} 
+                                id="age" />                               
                             </form>                                   
                         </div> 
                     </div>                      
@@ -204,64 +245,33 @@ export default function Energikalkylator(){
                             <div className="rh-result-list--icon">                                
                                 <img src='/image/user.svg' alt="användare"></img>
                             </div>
-                            <div className="rh-result-list-personal-result">                                
-                                <div className='rh-result-list-personal--info'>                                    
-                                    <span className='rh-result-list-personal-result--header'>Vikt: </span>  
-                                    <span className='rh-result-list-personal-result--space'></span>                         
-                                    <span><strong>{values.weight && (values.weight + ' kg')}</strong></span> 
-                                </div>
-                                <div className='rh-result-list-personal--info'> 
-                                    <span className='rh-result-list-personal-result--header'>Längd: </span>
-                                    <span className='rh-result-list-personal-result--space'></span>
-                                    <span><strong>{values.length && (values.length + ' cm')}</strong></span>
-                                </div> 
-                                <div className='rh-result-list-personal--info'>   
-                                    <span className='rh-result-list-personal-result--header'>Ålder: </span>
-                                    <span className='rh-result-list-personal-result--space'></span>
-                                    <span><strong> {values.age && (values.age + ' år')}</strong></span> 
-                                </div>
-                                <div className='rh-result-list-personal--info'>    
-                                    <span className='rh-result-list-personal-result--header'>BMI: </span>
-                                    <span className='rh-result-list-personal-result--space'></span>
-                                    <span><strong> {0 < BMI && BMI < 300 && (BMI)}</strong></span> 
-                                </div>
+                            <div className="rh-result-list-personal-result">
+                                <PersonalInput inputValue={values.weight} inputTitle='Vikt' inputUnit=' kg'/>
+                                <PersonalInput inputValue={values.length} inputTitle='Längd' inputUnit=' cm'/>
+                                <PersonalInput inputValue={values.age} inputTitle='Ålder' inputUnit=' år'/>
+                                <PersonalInput inputValue={0 < BMI && BMI < 300 && (BMI)} inputTitle='BMI' inputUnit=' '/>
                             </div>                            
-                        </div>
-                            
+                        </div>                            
                             {/*Energivärden*/}
                         <div className='rh-result-list'>
                             <div className="rh-result-list--icon">                                
                                 <img src='/image/bolt.svg' alt="energi"></img>
-                            </div>
+                            </div>                            
                             <div className="rh-result-list-info">
-                                <div>
-                                    <p className="rh-result-list--text">Aktivitetsnivå:
-                                    <br className='rh-result-list--break'></br>    
-                                    <strong> {activityMessage}</strong></p>                                   
-                                </div>
-                                <div className='rh-result-list__item-energy-info--overweight'> 
-                                    {(lengthInNumber) > 100 && BMI > 25 
-                                            ? <p className='rh-info-overweight--text'>{overweightInfo}</p> 
-                                            : <p className='rh-info-overweight--text-invisible'>{overweightInfo}</p>                                               
-                                    }  
-                                </div>                                 
+                                <ActivityInfo title="Aktivitetsnivå: " text={activityMessage} />
+                                <OverWeightInfo length={lengthInNumber} BMI={BMI} />                              
                                 { energyNeed > 0 ? 
                                 energyNeedExtra > 0 ?
-                                (<div>
-                                    <p className="rh-result-list--text">Sammanlagt energibehov:
-                                    <br className='rh-result-list--break'></br>
-                                    <strong> {Math.round(energyNeed)} - {Math.round(energyNeedExtra)} kcal per dygn</strong></p>                                         
-                                </div>) :
-                                (<div>
-                                    <p className="rh-result-list--text">Sammanlagt energibehov:
-                                    <br className='rh-result-list--break'></br> 
-                                    <strong> {Math.round(energyNeed)} kcal per dygn</strong> </p>                                        
-                                </div>) :
-                                (<div>
-                                    <p className="rh-result-list--text">Sammanlagt energibehov: </p>                                         
-                                </div>)
+                                (<ActivityInfo 
+                                    title="Sammanlagt energibehov: " 
+                                    energyValue={`${Math.round(energyNeed)} - ${Math.round(energyNeedExtra)} kcal per dygn`}/>
+                                ) :
+                                (<ActivityInfo title="Sammanlagt energibehov: " energyValue={Math.round(energyNeed)} text=" kcal per dygn" /> 
+                                ) :
+                                (<ActivityInfo title="Sammanlagt energibehov: " />
+                                )
                                 } 
-                            </div>                            
+                            </div>                         
                         </div>       
 
                             {/*Proteinvärden*/}            
@@ -270,31 +280,17 @@ export default function Energikalkylator(){
                                 <img src='/image/pizza.svg' alt="energi"></img>
                             </div>
                                 { protHealthy > 0 ? 
-                                (<div className="rh-result-list-info">
-                                    <div>
-                                        <p className="rh-result-list--text">Proteinbehov som frisk: 
-                                        <br className='rh-result-list--break'></br>
-                                        <strong> {protHealthy} gram/dygn </strong></p>
-                                    </div>  
-                                    <div className='rh-result-list__item-energy-info--overweight'> 
-                                    {(lengthInNumber) > 100 && BMI > 25 
-                                        ? <p className='rh-info-overweight--text'>{overweightInfo}</p> 
-                                        : <p className='rh-info-overweight--text-invisible'>{overweightInfo}</p>   
-                                    } 
-                                    </div>                                  
-                                    <div>
-                                        <p className="rh-result-list--text">Proteinbehov som sjuk: 
-                                        <br className='rh-result-list--break'></br>
-                                        <strong> {protSickLowerLimit} - {protSickUpperLimit} gram/dygn</strong></p>
-                                    </div>                                    
+                                (
+                                <div className="rh-result-list-info">
+                                    <ProtHealthy protHealthy={protHealthy} />
+                                    <OverWeightInfo length={lengthInNumber} BMI={BMI} />                                  
+                                    <ProtUnHealthy lowerLimit={protSickLowerLimit} upperLimit={protSickUpperLimit} />                                    
                                 </div>) :
                                 (<div className="rh-result-list-info">
                                     <div>
                                         <p className="rh-result-list--text">Proteinbehov som frisk:</p>
                                     </div> 
-                                    <div className='rh-result-list__item-energy-info--overweight'>
-                                    <p className='rh-info-overweight--text-invisible'>{overweightInfo}</p> 
-                                    </div>                                    
+                                    <OverWeightInfo length={lengthInNumber} BMI={BMI} />                                     
                                     <div>
                                         <p className="rh-result-list--text">Proteinbehov som sjuk:</p>
                                     </div>
