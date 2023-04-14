@@ -2,6 +2,7 @@
     "conventionalCommits.scopes": [
         "calculatorform",
         "changed structure in code",
-        "index"
+        "index",
+        "infotext"
     ]
 }

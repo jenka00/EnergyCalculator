@@ -1,30 +1,26 @@
-export function ProteinHealthy({
-    proteinHealthy
-}: { proteinHealthy: number }) {
-    return (
-        <div>
-            <p className="rh-result-list--text">Proteinbehov som frisk:
-                <br className='rh-result-list--break'></br>
-                <strong> {proteinHealthy} gram/dygn </strong></p>
-        </div>
-    )
-}
-export function ProteinUnHealthy({
+export function ProteinNeeds({
+    proteinHealthy,
     lowerLimit,
-    upperLimit
-}: {
-    lowerLimit: number,
-    upperLimit: number
-}) {
+    upperLimit,
+    isHealthy
+  }: {
+    proteinHealthy?: number,
+    lowerLimit?: number,
+    upperLimit?: number,
+    isHealthy: boolean
+  }) {
     return (
-        <div>
-            <p className="rh-result-list--text">Proteinbehov som sjuk:
-                <br className='rh-result-list--break'></br>
-                <strong> {lowerLimit} - {upperLimit} gram/dygn</strong></p>
-        </div>
+      <div>
+        <p className="rh-result-list--text">
+          {isHealthy ? "Proteinbehov som frisk:" : "Proteinbehov som sjuk:"}
+          <br className='rh-result-list--break'></br>
+          <strong> {isHealthy ? proteinHealthy : `${lowerLimit} - ${upperLimit}`} gram/dygn </strong>
+        </p>
+      </div>
     )
-}
-export function ActivityInfo({
+  }
+  
+export function EnergyNeeds({
     title,
     text,
     energyValue,
@@ -68,6 +64,7 @@ export function OverWeightInfo({
         </div>
     )
 }
+
 export function LowAgeWarning({
     isInputValid
 }: {

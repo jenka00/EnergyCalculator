@@ -4,9 +4,8 @@ import CalculatorForm from "./CalculatorForm";
 import { CalculatorValues } from "../interfaces/ICalculatorValues";
 import { activityValues } from "../values/activityValues";
 import {
-    ProteinHealthy,
-    ProteinUnHealthy,
-    ActivityInfo,
+    ProteinNeeds,
+    EnergyNeeds,
     OverWeightInfo,
     LowAgeWarning,
 } from "./CalculatorInfoText";
@@ -21,15 +20,26 @@ export default function EnergyCalculator() {
     }
     const [values, setValues] = useState<CalculatorValues>(intialState);
 
+    let weightInNumber = parseInt(values.weight);
+    let lengthInNumber = parseInt(values.length);
+    let ageInNumber = parseInt(values.age);
+    const ageLowerLimit = 18;
+    const bmiUpperLimit = 25;
+    const bmiLowerLimit = ageInNumber >= 70 ? 22 : 20;
+
     const [activity, setActivity] = useState("");
+
+    let energyNeedExtra = 0;
+    let energyAdjustment = 1;
+    const metabolicRate = parseInt(activity);
 
     const [activityMessage, setActivityMessage] = useState("");
     const handleChange =
         (fieldName: keyof CalculatorValues) =>
             (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
                 setValues({ ...values, [fieldName]: e.target.value });
-            };
-      
+            };        
+
     const handleSelect = (
         e: React.ChangeEvent<HTMLInputElement>,
         infoText: string,
@@ -41,24 +51,13 @@ export default function EnergyCalculator() {
         setValues(intialState);
         setActivity("");
         setActivityMessage("");
-    }     
-
-    let weightInNumber = parseInt(values.weight);
-    let lengthInNumber = parseInt(values.length);
-    let ageInNumber = parseInt(values.age);
-    const ageLowerLimit = 18;
-
-    let isInputValid = weightInNumber > 0 && lengthInNumber > 0 && ageInNumber > 0 && ageInNumber > 0 ;
-    let isFormValid = isInputValid && activity !== "";
-
+    }    
+    
+    let isInputValid = weightInNumber > 0 && lengthInNumber > 0 && ageInNumber > 0 && ageInNumber > 0 ;   
+    let isFormValid = isInputValid && activity !== ""
     let bmiValue = Math.round(
         weightInNumber / (((lengthInNumber / 100) * lengthInNumber) / 100)
     );
-    const bmiUpperLimit = 25;
-    const bmiLowerLimit = ageInNumber >= 70 ? 22 : 20;
-    let energyNeedExtra = 0;
-    let energyAdjustment = 1;
-    const metabolicRate = parseInt(activity);
 
     //Vid övervikt används den kroppsvikt som motsvarar BMI 25 för personens längd + tillägg av 25% av den överskjutande vikten.
     if (bmiValue > bmiUpperLimit) {
@@ -81,7 +80,7 @@ export default function EnergyCalculator() {
     ageInNumber >= 70 && bmiValue > bmiLowerLimit && (energyAdjustment = energyAdjustment - 0.1)
 
     //Energibehov och ämnesomsättning justerat för ålder < 30
-    if (ageInNumber < 30) {
+    if (ageInNumber <= 30) {
         energyNeed = energyNeed * 1.1;
         metabolicRateAdjusted = metabolicRateAdjusted * 1.1;
     }
@@ -146,12 +145,12 @@ export default function EnergyCalculator() {
                                     onChange={handleChange("age")}
                                     id="age"
                                 />
-                                {isFormValid 
-                                ? <LowAgeWarning isInputValid={ageInNumber >= ageLowerLimit} />
-                                : <div className='rh-result-list__item-energy-info--age'>                                   
-                                     <p className='rh-info-age--invisible'>&nbsp;</p> 
-                                </div>  
-                            }                              
+                                {isFormValid
+                                    ? <LowAgeWarning isInputValid={ageInNumber >= ageLowerLimit} />
+                                    : <div className='rh-result-list__item-energy-info--age'>
+                                        <p className='rh-info-age--invisible'>&nbsp;</p>
+                                    </div>
+                                }
                             </form>
                         </div>
                     </div>
@@ -213,9 +212,9 @@ export default function EnergyCalculator() {
                                 />
                                 <PersonalInput
                                     inputValue={
-                                        isFormValid === true 
-                                        && ageInNumber >= ageLowerLimit 
-                                        && 0 < bmiValue && bmiValue < 300 
+                                        isFormValid
+                                        && ageInNumber >= ageLowerLimit
+                                        && 0 < bmiValue && bmiValue < 300
                                         && bmiValue}
                                     inputTitle="BMI"
                                     inputUnit=""
@@ -232,7 +231,7 @@ export default function EnergyCalculator() {
                                 <img src="/image/bolt.svg" alt=""></img>
                             </div>
                             <div className="rh-result-list-info">
-                                <ActivityInfo
+                                <EnergyNeeds
                                     title="Aktivitetsnivå: "
                                     text={activityMessage}
                                     energyValue={""}
@@ -246,7 +245,7 @@ export default function EnergyCalculator() {
                                     inputAge={ageInNumber} />
                                 {energyNeed > 0 ? (
                                     energyNeedExtra > 0 ? (
-                                        <ActivityInfo
+                                        <EnergyNeeds
                                             title="Sammanlagt energibehov: "
                                             text=""
                                             energyValue={`${Math.round(energyNeed)} - ${Math.round(
@@ -256,7 +255,7 @@ export default function EnergyCalculator() {
                                             inputAge={ageInNumber}
                                         />
                                     ) : (
-                                        <ActivityInfo
+                                        <EnergyNeeds
                                             title="Sammanlagt energibehov: "
                                             energyValue={`${Math.round(energyNeed)}`}
                                             text=" kcal per dygn"
@@ -265,7 +264,7 @@ export default function EnergyCalculator() {
                                         />
                                     )
                                 ) : (
-                                    <ActivityInfo
+                                    <EnergyNeeds
                                         title="Sammanlagt energibehov: "
                                         energyValue=""
                                         text=""
@@ -284,14 +283,11 @@ export default function EnergyCalculator() {
                             <div className="rh-result-list--icon">
                                 <img src="/image/eggs.svg" alt=""></img>
                             </div>
-                            {proteinHealthy > 0 && isFormValid && ageInNumber >= 18 ? (
+                            {proteinHealthy > 0 && isFormValid === true && ageInNumber >= 18 ? (
                                 <div className="rh-result-list-info">
-                                    <ProteinHealthy proteinHealthy={proteinHealthy} />
+                                    <ProteinNeeds proteinHealthy={proteinHealthy} isHealthy={true} />
                                     <OverWeightInfo length={lengthInNumber} BMI={bmiValue} inputIsValid={isFormValid} inputAge={ageInNumber} />
-                                    <ProteinUnHealthy
-                                        lowerLimit={proteinSickLowerLimit}
-                                        upperLimit={proteinSickUpperLimit}
-                                    />
+                                    <ProteinNeeds isHealthy={false} lowerLimit={proteinSickLowerLimit} upperLimit={proteinSickUpperLimit} />
                                 </div>
                             ) : (
                                 <div className="rh-result-list-info">

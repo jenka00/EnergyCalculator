@@ -48,6 +48,11 @@ code {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
 }
+.rh-calculator-form-input {
+  height: 2rem;
+  padding: 1px 5px;
+  width: 97%;
+}
 
 .rh-calculator-weight,
 .rh-calculator-length {
@@ -62,13 +67,6 @@ code {
 
 .rh-info-age--text {
   color: red;
-}
-
-.rh-calculator-form .rh-calculator-form-input {
-  display: block;
-  width: 97%;
-  height: 2rem;
-  padding: 1px 5px;
 }
 
 .rh-info-age--invisible {
@@ -119,7 +117,7 @@ input[type="radio"] {
 
 .rh-result-list-personal-result--header {
   text-align: left;
-  min-width: 3.5rem;  
+  min-width: 3.5rem;
 }
 
 .rh-result-list-personal-result--space {
