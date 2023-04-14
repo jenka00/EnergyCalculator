@@ -6,20 +6,25 @@ export default function CalculatorForm({
     value,
     onChange,
     id
-}: {labelTitle: string, placeholderTitle: string, value: number, onChange: ChangeEventHandler, id: string}){
-    
-    return (        
+}: { labelTitle: string, placeholderTitle: string, value: string, onChange: ChangeEventHandler, id: string }) {
+
+    return (
         <>
             <label>{labelTitle}</label>
             <div className={`rh-calculator-${id}`}>
                 <input
-                type="number"                
-                className="rh-calculator-form-input"
-                placeholder={placeholderTitle}
-                value={value}
-                min="0"
-                onChange={(e)=> onChange(e)}
-                id={id}
+                    type="text"
+                    className="rh-calculator-form-input"
+                    placeholder={placeholderTitle}
+                    value={value}
+                    onChange={(e) => {
+                        const inputValue = e.target.value;
+                        const isPositiveNumber = /^(?:[1-9]\d*|0)?$/.test(inputValue);
+                        if (isPositiveNumber) {
+                            onChange(e);
+                        }
+                    }}
+                    id={id}
                 />
             </div>
         </>

@@ -47,8 +47,10 @@ export default function EnergyCalculator() {
     let lengthInNumber = parseInt(values.length);
     let ageInNumber = parseInt(values.age);
     const ageLowerLimit = 18;
+
     let isInputValid = weightInNumber > 0 && lengthInNumber > 0 && ageInNumber > 0 && ageInNumber > 0 ;
     let isFormValid = isInputValid && activity !== "";
+
     let bmiValue = Math.round(
         weightInNumber / (((lengthInNumber / 100) * lengthInNumber) / 100)
     );
@@ -121,7 +123,8 @@ export default function EnergyCalculator() {
                                 <CalculatorForm
                                     labelTitle="Vikt (kg)"
                                     placeholderTitle="Ange vikt"
-                                    value={parseInt(values.weight)}
+                                    // value={parseInt(values.weight)}
+                                    value={values.weight}
                                     onChange={handleChange("weight")}
                                     id="weight"
                                 />
@@ -129,7 +132,8 @@ export default function EnergyCalculator() {
                                 <CalculatorForm
                                     labelTitle="Längd (cm)"
                                     placeholderTitle="Ange längd"
-                                    value={parseInt(values.length)}
+                                    // value={parseInt(values.length)}
+                                    value={values.length}
                                     onChange={handleChange("length")}
                                     id="length"
                                 />
@@ -137,7 +141,8 @@ export default function EnergyCalculator() {
                                 <CalculatorForm
                                     labelTitle="Ålder (år)"
                                     placeholderTitle="Ange ålder"
-                                    value={parseInt(values.age)}
+                                    // value={parseInt(values.age)}
+                                    value={values.age}
                                     onChange={handleChange("age")}
                                     id="age"
                                 />

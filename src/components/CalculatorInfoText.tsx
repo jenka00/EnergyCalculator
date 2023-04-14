@@ -68,15 +68,18 @@ export function OverWeightInfo({
         </div>
     )
 }
-export function LowAgeWarning({ isInputValid }: { isInputValid: boolean }) {
+export function LowAgeWarning({
+    isInputValid
+}: {
+    isInputValid: boolean
+}) {
     const infoText = "Inga uträkningar utförs för personer under 18 år!";
     return (
-      <div className="rh-result-list__item-energy-info--age">
-        {!isInputValid ? (
-          <p className="rh-info-age--text">{infoText}</p>
-        ) : (
-          <p className="rh-info-age--invisible">&nbsp;</p>
-        )}
-      </div>
-    );
-  }
+        <div className='rh-result-list__item-energy-info--age'>
+            {!isInputValid 
+                ? <p className='rh-info-age--text'>{infoText}</p>         
+                : <p className='rh-info-age--invisible'>&nbsp;</p>      
+            }      
+        </div>
+    )
+}

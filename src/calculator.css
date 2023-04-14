@@ -12,146 +12,171 @@ code {
     monospace;
 }
 
-.rh-calculator{    
-    padding: 0rem 2rem;
+.rh-calculator {
+  padding: 0rem 2rem;
 }
-.rh-calculator-container {  
+
+.rh-calculator-container {
   display: flex;
 }
-.rh-calculator-column--left{
+
+.rh-calculator-column--left {
   flex: 1;
   width: 35%;
   background-color: #F5F6F7;
-  border: 1px solid #C4C8CA; 
+  border: 1px solid #C4C8CA;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05), 0px 20px 25px -5px rgba(0, 0, 0, 0.05), 0px 10px 10px -5px rgba(0, 0, 0, 0.04);
   border-radius: 4px;
 }
-.rh-calculator-column--right{
+
+.rh-calculator-column--right {
   width: 65%;
   margin-left: 5rem;
   background: #FFFFFF;
-  border: 1px solid #C4C8CA;   
+  border: 1px solid #C4C8CA;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05), 0px 20px 25px -5px rgba(0, 0, 0, 0.05), 0px 10px 10px -5px rgba(0, 0, 0, 0.04);
   border-radius: 4px;
 }
-.rh-calculator-form{  
+
+.rh-calculator-form {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
 }
-.rh-calculator-form--last{
+
+.rh-calculator-form--last {
   padding-bottom: 1.5rem;
   margin-left: 1.5rem;
-  margin-right: 1.5rem; 
+  margin-right: 1.5rem;
 }
-.rh-calculator-weight, 
-.rh-calculator-length
-{
+
+.rh-calculator-weight,
+.rh-calculator-length {
   padding-bottom: 1rem;
 }
-input[type="number"]{   
-  padding: 1px 5px;
-  width: 97%;
-}
-.rh-calculator-line{
-  
+
+.rh-calculator-line {
   margin-left: 1rem;
   margin-right: 1rem;
-  border-bottom: 1px solid #C4C8CA; 
+  border-bottom: 1px solid #C4C8CA;
 }
+
 .rh-info-age--text {
   color: red;
 }
-.rh-calculator-form .rh-calculator-form-input{
+
+.rh-calculator-form .rh-calculator-form-input {
   display: block;
+  width: 97%;
   height: 2rem;
+  padding: 1px 5px;
 }
-.rh-form-activity-element-control{
+
+.rh-info-age--invisible {
+  margin-top: 0;
+}
+
+.rh-form-activity-element-control {
   display: block;
   margin-block-end: 1rem;
   margin-inline-start: 0px;
-  margin-inline-end: 0px;  
+  margin-inline-end: 0px;
 }
-.rh-form-control--label{
-  display: flex; 
+
+.rh-form-control--label {
+  display: flex;
   cursor: pointer;
 }
-input[type="radio"] { 
+
+input[type="radio"] {
   display: block;
   cursor: pointer;
 }
-.rh-form-control--label span{
+
+.rh-form-control--label span {
   padding-left: 10px;
   display: block;
   overflow-wrap: break-word;
   min-width: 150px;
 }
-.rh-resultlist--title{
+
+.rh-resultlist--title {
   padding-left: 1.5rem;
 }
+
 /*Personliga input-värden*/
-.rh-result-list-personal-result{
+.rh-result-list-personal-result {
   display: block;
   width: 100%;
   margin-left: 2rem;
 }
-.rh-result-list-personal--info{
+
+.rh-result-list-personal--info {
   display: flex;
   width: 100%;
   padding: 0.2rem 0rem;
   font-size: large;
 }
-.rh-result-list-personal-result--header{
+
+.rh-result-list-personal-result--header {
   text-align: left;
   min-width: 3.5rem;  
 }
-.rh-result-list-personal-result--space{
+
+.rh-result-list-personal-result--space {
   min-width: 1em;
   max-width: 2em;
 }
-.rh-result-list--icon img{  
+
+.rh-result-list--icon img {
   width: 3rem;
   height: 3rem;
   padding-bottom: 2rem;
 }
 
 /*Energivärden*/
-.rh-result-list{
+.rh-result-list {
   border-bottom: 1px solid #C4C8CA;
   display: flex;
-  align-items: center;  
+  align-items: center;
   padding-bottom: 2.5em;
   margin-left: 1rem;
   margin-right: 1rem;
 }
-.rh-result-list-info{
+
+.rh-result-list-info {
   display: block;
   width: 100%;
   margin-left: 2rem;
-  font-size: large; 
+  font-size: large;
 }
-.rh-result-list--text{
+
+.rh-result-list--text {
   margin-block-start: 0px;
   margin-block-end: 0px;
 }
-.rh-result-list--break{
+
+.rh-result-list--break {
   display: none;
 }
 
 /*Proteinvärden*/
-.rh-result-list--protein{   
+.rh-result-list--protein {
   border-bottom: none;
 }
-/*BMI > 25 värden*/ 
-.rh-result-list__item-energy-info--overweight{
-  font-size: medium; 
+
+/*BMI > 25 värden*/
+.rh-result-list__item-energy-info--overweight {
+  font-size: medium;
   margin-block-start: 0.7rem;
   margin-block-end: 0.7rem;
 }
-.rh-info-overweight--text{
+
+.rh-info-overweight--text {
   display: block;
   margin-block: 0px;
 }
-.rh-info-overweight--text-invisible{
+
+.rh-info-overweight--text-invisible {
   display: block;
   margin-block: 0px;
   opacity: 0;
@@ -160,7 +185,7 @@ input[type="radio"] {
 }
 
 /*Button*/
-button{
+button {
   margin: 1rem 0rem;
   width: 9rem;
   height: 2.5rem;
@@ -177,62 +202,76 @@ button{
   gap: 5px;
   cursor: pointer;
 }
+
 .icon .icon-tabler .icon-tabler-refresh {
   color: #FFFFFF;
 
 }
+
 @media only screen and (max-width: 700px) {
   .rh-calculator {
-    padding: 2rem;    
+    padding: 2rem;
   }
-  h1{
+
+  h1 {
     font-size: x-large;
   }
-  h2{
+
+  h2 {
     font-size: large;
   }
+
   .rh-calculator-container {
     display: flex;
     flex-wrap: wrap;
     padding: 0rem;
   }
-  .rh-calculator-column--left{
-    flex: 100%;  
-  }
-  .rh-calculator-column--right{
+
+  .rh-calculator-column--left {
     flex: 100%;
-    margin-left: 0px; 
   }
-  .rh-result-list{
+
+  .rh-calculator-column--right {
+    flex: 100%;
+    margin-left: 0px;
+  }
+
+  .rh-result-list {
     display: table;
     margin: 0;
     width: 100%;
     padding-bottom: 1.5rem;
   }
-  .rh-resultlist--title{
+
+  .rh-resultlist--title {
     margin: auto;
     text-align: center;
     padding: 0;
   }
-  .rh-result-list--icon{
+
+  .rh-result-list--icon {
     display: table-row;
     margin: auto;
     text-align: center;
   }
-  .rh-result-list--icon img{
+
+  .rh-result-list--icon img {
     margin: auto;
-    padding-bottom: 0.5rem; 
+    padding-bottom: 0.5rem;
   }
-  .rh-result-list--break{
+
+  .rh-result-list--break {
     display: flex;
-  } 
+  }
+
   .rh-result-list-info,
-  .rh-result-list-personal--info{
+  .rh-result-list-personal--info {
     margin: auto;
     display: table-row;
     text-align: center;
   }
-  .rh-result-list-personal-result{
+
+  .rh-result-list-personal-result {
     display: table;
     margin: auto;
     text-align: center;
