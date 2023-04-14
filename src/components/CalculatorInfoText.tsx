@@ -68,39 +68,15 @@ export function OverWeightInfo({
         </div>
     )
 }
-
-export function LowAgeWarning({
-    isInputValid,
-    inputAge
-}: {
-    isInputValid: boolean
-    inputAge: number
-}) {
+export function LowAgeWarning({ isInputValid }: { isInputValid: boolean }) {
     const infoText = "Inga uträkningar utförs för personer under 18 år!";
     return (
-        <div className='rh-result-list__item-energy-info--age'>
-            {!isInputValid 
-                ? <p className='rh-info-age--text'>{infoText}</p>         
-                : <p className='rh-info-age--invisible'>&nbsp;</p>      
-            }      
-        </div>
-    )
-}
-
-// export function ProteinInfoText({
-//     title,
-//     lowerProteinLimit,
-//     upperProteinLimit
-// }:InfoTextValues) {
-    
-//     return (
-//             <div>
-//                 <p className="rh-result-list--text">{title}
-//                 <br className='rh-result-list--break'></br>
-//                 {upperProteinLimit
-//                 ? <strong> {lowerProteinLimit} gram/dygn </strong>
-//                 : <strong> {lowerProteinLimit} - {upperProteinLimit} gram/dygn </strong>}
-//                 </p>
-//             </div>
-//     )
-// }
+      <div className="rh-result-list__item-energy-info--age">
+        {!isInputValid ? (
+          <p className="rh-info-age--text">{infoText}</p>
+        ) : (
+          <p className="rh-info-age--invisible">&nbsp;</p>
+        )}
+      </div>
+    );
+  }

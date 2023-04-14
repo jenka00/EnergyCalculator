@@ -102,7 +102,7 @@ input[type="radio"] {
 }
 .rh-result-list-personal-result--header{
   text-align: left;
-  min-width: 3rem;  
+  min-width: 3.5rem;  
 }
 .rh-result-list-personal-result--space{
   min-width: 1em;

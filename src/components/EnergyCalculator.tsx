@@ -1,6 +1,5 @@
-import React from "react";
 import "../calculator.css";
-import { useState } from "react";
+import React, { useState } from "react";
 import CalculatorForm from "./CalculatorForm";
 import { CalculatorValues } from "../interfaces/ICalculatorValues";
 import { activityValues } from "../values/activityValues";
@@ -42,16 +41,14 @@ export default function EnergyCalculator() {
         setValues(intialState);
         setActivity("");
         setActivityMessage("");
-    }
+    }     
 
     let weightInNumber = parseInt(values.weight);
     let lengthInNumber = parseInt(values.length);
     let ageInNumber = parseInt(values.age);
     const ageLowerLimit = 18;
-    let isInputValid = false;
-    weightInNumber > 0 && lengthInNumber > 0 && ageInNumber > 0 && ageInNumber >= 18 ? isInputValid = true : isInputValid = false;
-    let isFormValid = false;
-    isInputValid === true && activity !== "" ? isFormValid = true : isFormValid = false;
+    let isInputValid = weightInNumber > 0 && lengthInNumber > 0 && ageInNumber > 0 && ageInNumber > 0 ;
+    let isFormValid = isInputValid && activity !== "";
     let bmiValue = Math.round(
         weightInNumber / (((lengthInNumber / 100) * lengthInNumber) / 100)
     );
@@ -144,8 +141,12 @@ export default function EnergyCalculator() {
                                     onChange={handleChange("age")}
                                     id="age"
                                 />
-                                <LowAgeWarning isInputValid={isInputValid} inputAge={ageInNumber}/>
-                                
+                                {isFormValid 
+                                ? <LowAgeWarning isInputValid={ageInNumber >= ageLowerLimit} />
+                                : <div className='rh-result-list__item-energy-info--age'>                                   
+                                     <p className='rh-info-age--invisible'>&nbsp;</p> 
+                                </div>  
+                            }                              
                             </form>
                         </div>
                     </div>
@@ -206,7 +207,11 @@ export default function EnergyCalculator() {
                                     inputUnit=" år"
                                 />
                                 <PersonalInput
-                                    inputValue={isFormValid === true && 0 < bmiValue && bmiValue < 300 && bmiValue}
+                                    inputValue={
+                                        isFormValid === true 
+                                        && ageInNumber >= ageLowerLimit 
+                                        && 0 < bmiValue && bmiValue < 300 
+                                        && bmiValue}
                                     inputTitle="BMI"
                                     inputUnit=""
                                 />
@@ -274,7 +279,7 @@ export default function EnergyCalculator() {
                             <div className="rh-result-list--icon">
                                 <img src="/image/eggs.svg" alt=""></img>
                             </div>
-                            {proteinHealthy > 0 && isFormValid === true && ageInNumber >= 18 ? (
+                            {proteinHealthy > 0 && isFormValid && ageInNumber >= 18 ? (
                                 <div className="rh-result-list-info">
                                     <ProteinHealthy proteinHealthy={proteinHealthy} />
                                     <OverWeightInfo length={lengthInNumber} BMI={bmiValue} inputIsValid={isFormValid} inputAge={ageInNumber} />
